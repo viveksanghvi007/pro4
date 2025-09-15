@@ -3,7 +3,7 @@ import bg from "../assets/authBg.png"
 import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
-import { userDataContext } from '../context/userContext';
+import { userDataContext } from '../context/UserContext';
 import axios from "axios"
 function SignIn() {
   const [showPassword,setShowPassword]=useState(false)
@@ -11,26 +11,26 @@ function SignIn() {
   const navigate=useNavigate()
   const [email,setEmail]=useState("")
   const [loading,setLoading]=useState(false)
-    const [password,setPassword]=useState("")
-const [err,setErr]=useState("")
+  const [password,setPassword]=useState("")
+  const [err,setErr]=useState("")
   const handleSignIn=async (e)=>{
     e.preventDefault()
     setErr("")
     setLoading(true)
-try {
-  let result=await axios.post(`${serverUrl}/api/auth/signin`,{
-   email,password
-  },{withCredentials:true} )
- setUserData(result.data)
-  setLoading(false)
-   navigate("/")
-} catch (error) {
-  console.log(error)
-  setUserData(null)
-  setLoading(false)
-  setErr(error.response.data.message)
-}
+    try {
+      let result=await axios.post(`${serverUrl}/api/auth/signin`,{
+       email,password
+      },{withCredentials:true} )
+     setUserData(result.data)
+      setLoading(false)
+     navigate("/")
+    } catch (error) {
+      console.log(error)
+      setUserData(null)
+      setLoading(false)
+      setErr(error.response.data.message)
     }
+  }
   return (
     <div className='w-full h-[100vh] bg-cover flex justify-center items-center' style={{backgroundImage:`url(${bg})`}} >
  <form className='w-[90%] h-[600px] max-w-[500px] bg-[#00000062] backdrop-blur shadow-lg shadow-black flex flex-col items-center justify-center gap-[20px] px-[20px]' onSubmit={handleSignIn}>
