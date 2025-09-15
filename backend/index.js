@@ -11,9 +11,10 @@ import geminiResponse from "./gemini.js"
 
 const app=express()
 app.use(cors({
-    origin: "http://localhost:5173"|| "https://pro4-1.onrender.com" ,
-    credentials:true
-}))
+    origin: ["http://localhost:5173", "https://pro4-1.onrender.com"],
+    credentials: true
+  }));
+
 const port=process.env.PORT || 5000
 app.use(express.json())
 app.use(cookieParser())
